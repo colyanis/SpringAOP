@@ -2,28 +2,51 @@ package com.mykola.spring.aop;
 
 import org.springframework.stereotype.Component;
 
-/**
- * Created by mtverdok on 4/24/2017.
- */
-@Component
-public class Camera {
-    public void snap() throws Exception {
-        System.out.println("SNAP!");
+@Component("camera")
+public class Camera implements PhotoSnapper, Machine, ICamera {
+	
+	public Camera() {
+		System.out.println("Hello from camera constructor");
+	}
 
-        throw new Exception("bye bye!");
-    }
+	@Deprecated
+	public void snap() {
+		System.out.println("SNAP!");
 
-    public void snap(int exposure) {
-        System.out.println("SNAP! Exposure: " + exposure);
-    }
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.caveofprogramming.spring.aop.ICamera#snap(int)
+	 */
+	public void snap(int exposure) {
+		System.out.println("SNAP! Exposure:" + exposure);
+	}
 
-    public String snap(String name) {
-        System.out.println("SNAP! Name: " + name);
+	public void snap(double exposure) {
+		System.out.println("SNAP! Exposure:" + exposure);
+	}
 
-        return name;
-    }
+	public void snap(int exposure, double value) {
+		System.out.println("SNAP! Exposure: " + exposure + ", " + value);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.caveofprogramming.spring.aop.ICamera#snap(java.lang.String)
+	 */
+	public String snap(String name) {
+		System.out.println("SNAP! Name:" + name);
+		
+		return name;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.caveofprogramming.spring.aop.ICamera#snapNighttime()
+	 */
+	public void snapNighttime() {
+		System.out.println("SNAP! Night mode.");
+	}
 
-    public void snapNightTime() {
-        System.out.println("Snap! Night mode.");
-    }
+	public void snapCar(Car car) {
+		System.out.println("Snapping car!");
+	}
 }
