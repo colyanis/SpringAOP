@@ -1,3 +1,5 @@
+package com.mykola.spring.aop;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
