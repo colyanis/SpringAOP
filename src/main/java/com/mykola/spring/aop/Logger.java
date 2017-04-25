@@ -12,12 +12,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class Logger {
 
-    @Pointcut("execution(void com.mykola.spring.aop.Camera.snap())")
+    @Pointcut("execution(* com.mykola.spring.aop.Camera.*(..))")
     public void cameraSnap() {
+    }
+
+    @Pointcut("execution(* com.mykola.spring.aop.Camera.snap(String))")
+    public void cameraSnapName() {
+    }
+
+    @Pointcut("execution(* *.*(..))")
+    public void cameraRelatedAction() {
     }
 
     @Before("cameraSnap()")
     public void aboutToTakePhoto() {
         System.out.println("About to take photo...");
+    }
+
+    @Before("cameraSnapName()")
+    public void aboutToTakePhotoWithName() {
+        System.out.println("About to take photo with name...");
+    }
+
+    @Before("cameraRelatedAction()")
+    public void aboutToDoCameraRelatedAction() {
+        System.out.println("Doing smth related to camera...");
     }
 }
